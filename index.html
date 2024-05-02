@@ -58,6 +58,7 @@
   </div>
 
   <script>
+
     let isRunning = false;
     let isStopped = false;
 
@@ -69,6 +70,7 @@
 
     function startActivity() {
       isRunning = true;
+      counter = 0;
     }
 
     function stopActivity() {
@@ -79,6 +81,7 @@
       sampleSound.fade(1, 0, 100);
       background(255);
     }
+
 
     function setup() {
       let canvas = createCanvas(windowWidth, windowHeight);
@@ -92,6 +95,7 @@
       frameRate(frameR);
       noFill();
     }
+
 
     function draw() {
       //background(220, 100, 50);
