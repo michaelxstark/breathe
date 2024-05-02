@@ -49,6 +49,7 @@
   <div class="container mt-5">
     <h1 class="text-center">Breathe</h1>
     <div class="text-center mt-3">
+      <p>breathe in 4 seconds. hold 7 seconds. breathe out 8 seconds.<p>
       <button onclick="startActivity()" id="mybutton" class="btn btn-dark">Start</button>
       <button onclick="stopActivity()" id="mybutton" class="btn btn-light">Stop</button>
     </div>
@@ -70,6 +71,7 @@
 
     function startActivity() {
       isRunning = true;
+      //sampleSound.stop();
       counter = 0;
     }
 
@@ -78,8 +80,10 @@
       isStopped = true;
       counter = 0;
       sizer = 0;
-      sampleSound.fade(1, 0, 100);
-      sampleSound.stop();
+      sampleSound.fade(1, 0, 250);
+      setTimeout(function() {
+        sampleSound.stop();
+      }, 250);
       background(255);
     }
 
@@ -106,6 +110,7 @@
         background(255, 10);
 
         if (counter < 1){
+          //sampleSound.stop();
           sampleSound.play();
           sampleSound.fade(0, 1, 100);
         }
