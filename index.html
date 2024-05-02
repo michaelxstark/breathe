@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breathe</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- p5.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <!-- Howler.js library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+  <style>
+  @font-face { font-family: BasierSquareMono-Regular; src: url('fonts/BasierSquareMono-Regular.otf'); }
+  @font-face { font-family: TAYBirdie; src: url('fonts/TAYBirdie.otf'); }
+  /* CSS for positioning canvas */
+  #canvas-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically as well */
+    height: 100%; /* Ensure the container takes full height */
+
+  }
+
+  /* Ensure the parent container takes full height */
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: TAYBirdie;
+  }
+
+  /* Ensure the container containing canvas takes full height */
+  .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+  }
+
+#mybutton{
+  margin-bottom: 0.05%;
+}
+
+</style>
+
+</head>
+<meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center">Breathe</h1>
+    <div class="text-center mt-3">
+      <button onclick="startActivity()" id="mybutton" class="btn btn-dark">Start</button>
+      <button onclick="stopActivity()" id="mybutton" class="btn btn-light">Stop</button>
+    </div>
+    <div id="canvas-container">
+      <!-- Canvas will be created here -->
+    </div>
+  </div>
+
+  <script>
+    let isRunning = false;
+    let isStopped = false;
+
+    let counter = 0;
+    let sizer = 0;
+    let frameR = 60;
+
+    let sampleSound = new Howl({src: ['breathe_II.mp3']});
+
+    function startActivity() {
+      isRunning = true;
+    }
+
+    function stopActivity() {
+      isRunning = false;
+      isStopped = true;
+      counter = 0;
+      sizer = 0;
+      sampleSound.fade(1, 0, 100);
+      background(255);
+    }
+
+    function setup() {
+      let canvas = createCanvas(windowWidth, windowHeight);
+      canvas.id('canvas-container');
+      canvas.style('display', 'block');
+      canvas.style('margin', 'auto');
+      canvas.parent('canvas-container');
+
+      //img = loadImage('HH_MM.jpg');
+
+      frameRate(frameR);
+      noFill();
+    }
+
+    function draw() {
+      //background(220, 100, 50);
+
+      if (isRunning) {
+
+        background(255, 10);
+
+        if (counter < 1){
+          sampleSound.play();
+          sampleSound.fade(0, 1, 100);
+        }
+
+        circle(width/2, height/3, sizer+windowWidth*0.05);
+
+        if (counter < 4*frameR){
+          sizer += 1;
+        }
+
+        else if (counter >= 4*frameR && counter < 11*frameR){
+          sizer += 0;
+        }
+
+        else if (counter >= 11*frameR && counter < 19*frameR){
+          sizer -= 0.5;
+        }
+
+        counter += 1;
+
+        if (counter == 18.9*frameR){
+          sampleSound.fade(1, 0, 100);
+        }
+
+        if (counter >= 19*frameR){
+          counter = 0;
+
+        }
+      }
+    }
+
+
+  </script>
+</body>
+</html>
