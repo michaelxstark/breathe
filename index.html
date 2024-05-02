@@ -49,7 +49,7 @@
   <div class="container mt-5">
     <h1 class="text-center">Breathe</h1>
     <div class="text-center mt-3">
-      <p>breathe in 4 seconds. hold 7 seconds. breathe out 8 seconds.<p>
+      <p>in 4 seconds. hold 7 seconds. out 8 seconds.<p>
       <button onclick="startActivity()" id="mybutton" class="btn btn-dark">Start</button>
       <button onclick="stopActivity()" id="mybutton" class="btn btn-light">Stop</button>
     </div>
@@ -112,10 +112,10 @@
         if (counter < 1){
           //sampleSound.stop();
           sampleSound.play();
-          sampleSound.fade(0, 1, 100);
+          sampleSound.fade(0, 1, 50);
         }
 
-        circle(width/2, height/3, sizer+windowWidth*0.05);
+        circle(width/2, height/3.5, sizer+windowWidth*0.04);
 
         if (counter < 4*frameR){
           sizer += 1;
